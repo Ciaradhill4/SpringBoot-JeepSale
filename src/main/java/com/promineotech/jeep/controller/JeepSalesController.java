@@ -18,8 +18,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 
-@OpenAPIDefinition(info = @Info(title = "Jeep Sales Service"),
-    servers = {@Server(url = "http://localhost:3306", description = "Local Server.")})
+@OpenAPIDefinition(info = @Info(title = "Jeep Sales Service"), servers = 
+    {@Server(url = "http://localhost:8080", description = "Local Server.")})
 
 @RequestMapping("/jeeps")
 public interface JeepSalesController {
@@ -37,15 +37,18 @@ public interface JeepSalesController {
           @ApiResponse(
               responseCode = "400", 
               description = "The request parameters are invalid", 
-              content = @Content(mediaType = "application/json")),
+              content = @Content(
+                  mediaType = "application/json")),
           @ApiResponse(
               responseCode = "404", 
               description = "No Jeeps were found with the input criteria", 
-              content = @Content(mediaType = "application/json")),
+              content = @Content(
+                  mediaType = "application/json")),
           @ApiResponse(
               responseCode = "500", 
               description = "An unplanned error occured.", 
-              content = @Content(mediaType = "application/json"))
+              content = @Content(
+                  mediaType = "application/json"))
       },
       parameters = {
           @Parameter(name = "model", 
@@ -58,11 +61,13 @@ public interface JeepSalesController {
               description = "The trim level (i.e., 'Sport')")
       }
     )
-
+  
   @GetMapping
   @ResponseStatus(code = HttpStatus.OK)
   List<Jeep> fetchJeeps(
-      @RequestParam(required = false) JeepModel model,
-      @RequestParam(required = false) String trim);
-  //@formatter:on
+      @RequestParam(required = false)
+      JeepModel model, 
+      @RequestParam(required = false)
+      String trim);
+//@formatter:on
 }

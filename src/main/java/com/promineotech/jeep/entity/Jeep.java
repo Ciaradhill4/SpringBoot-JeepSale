@@ -7,11 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data 
-
 @Builder 
-
 @NoArgsConstructor 
-
 @AllArgsConstructor 
 
 public class Jeep { 
@@ -29,3 +26,4 @@ public class Jeep {
   private BigDecimal basePrice; 
 
 } 
+
