@@ -18,13 +18,11 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import com.promineotech.jeep.controller.support.FetchTestJeepSupport;
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
-import lombok.Getter;
 
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) 
 @ActiveProfiles("test") 
 @Sql(scripts = { 
-
     "classpath:flyway/migrations/V1.0__Jeep_Schema.sql", 
 
     "classpath:flyway/migrations/V1.1__Jeep_Data.sql"},  
@@ -34,8 +32,7 @@ import lombok.Getter;
 
 class FetchJeepTest extends FetchTestJeepSupport{
   @Autowired
-  @Getter
-  private TestRestTemplate restTemplate; 
+  private TestRestTemplate getRestTemplate; 
 
   
   @LocalServerPort 
@@ -47,17 +44,20 @@ class FetchJeepTest extends FetchTestJeepSupport{
     //Given: a valid model, trim and URI
     JeepModel model = JeepModel.WRANGLER;
     String trim = "Sport";
-    String uri = String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
+    String uri = 
+        String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
    
     //When: a connection is made to URI
     ResponseEntity<List<Jeep>> response = 
-        restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {}); 
+        getRestTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {}); 
     
     //Then: a success(OK-200) status code is returned
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK); 
     
     //And the actual list returned is the same as the expected list
     List<Jeep> expected = buildExpected();
+    
+ 
     assertThat(response.getBody()).isEqualTo(expected);
   
   }

@@ -70,4 +70,5 @@ public interface JeepSalesController {
       @RequestParam(required = false)
       String trim);
 //@formatter:on
+  
 }
