@@ -56,14 +56,12 @@ public interface JeepOrderController {
           @Parameter(name = "orderRequest", 
               required = true, 
               description = "The order as JSON"),
-         
+    //@formatter:on  
       }
     )
   
   @PostMapping
   @ResponseStatus(code = HttpStatus.CREATED)
-  Order creatOrder(@Valid @RequestBody OrderRequest orderRequest);
-      
-//@formatter:on
+  Order createOrder(@Valid @RequestBody OrderRequest orderRequest);
   
 }

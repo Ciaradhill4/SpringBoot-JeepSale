@@ -7,7 +7,7 @@ import java.util.List;
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 
-public class FetchTestJeepSupport {
+public class FetchTestJeepSupport extends BaseTest{
   protected List<Jeep> buildExpected() {
     List<Jeep> list = new LinkedList<>();
     

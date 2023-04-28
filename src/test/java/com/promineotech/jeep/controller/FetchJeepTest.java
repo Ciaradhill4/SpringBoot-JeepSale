@@ -3,11 +3,8 @@ package com.promineotech.jeep.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -31,14 +28,8 @@ import com.promineotech.jeep.entity.JeepModel;
 
 
 class FetchJeepTest extends FetchTestJeepSupport{
-  @Autowired
-  private TestRestTemplate getRestTemplate; 
-
-  
-  @LocalServerPort 
-  private int serverPort;
-  
-  
+ 
+ 
   @Test
     void testThatJeepsAreReturnedWhenAValidModelAndTrimSupplied() {
     //Given: a valid model, trim and URI
@@ -49,7 +40,7 @@ class FetchJeepTest extends FetchTestJeepSupport{
    
     //When: a connection is made to URI
     ResponseEntity<List<Jeep>> response = 
-        getRestTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {}); 
+        restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {}); 
     
     //Then: a success(OK-200) status code is returned
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK); 

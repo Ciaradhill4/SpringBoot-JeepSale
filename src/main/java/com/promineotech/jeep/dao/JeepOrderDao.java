@@ -10,11 +10,13 @@ import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 import com.promineotech.jeep.entity.Option;
 import com.promineotech.jeep.entity.Order;
+import com.promineotech.jeep.entity.OrderRequest;
 import com.promineotech.jeep.entity.Tire;
 
 public interface JeepOrderDao {
-
   
+  
+  List<Option> fetchOptions(List<String> optionIds);
   Optional<Customer> fetchCustomer(String customerId);
   Optional<Jeep> fetchModel(JeepModel model, String trim, int doors);
   Optional<Color> fetchColor(String colorId);
@@ -22,7 +24,7 @@ public interface JeepOrderDao {
   Optional<Tire> fetchTire(String tireId);
  
   
-  List<Option> fetchOptions(List<String> optionIds);
+  Order createOrder (OrderRequest orderRequest);
   
   
   Order saveOrder(Customer customer, Jeep jeep, Color color, Engine engine, Tire tire,

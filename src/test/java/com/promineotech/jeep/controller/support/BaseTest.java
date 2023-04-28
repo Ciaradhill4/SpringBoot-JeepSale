@@ -1,5 +1,26 @@
 package com.promineotech.jeep.controller.support;
 
-public class BaseTest {}
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import lombok.Getter;
+
+public class BaseTest {
+  @LocalServerPort
+  protected int serverPort;
+
+  @Autowired
+  @Getter
+  protected TestRestTemplate restTemplate;
+
+
+  protected String getBaseUriForJeep(){
+    return String.format("http://localhost:%d/jeeps", serverPort);
+  }
+
+  protected String getBaseUriForOrders(){
+    return String.format("http://localhost:%d/orders", serverPort);
+  }
+}
  
 
